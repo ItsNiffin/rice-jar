@@ -1,0 +1,94 @@
+############################################
+#                                          #
+#                    SXHKD                 #
+#					   #	
+############################################
+
+#----------Keybindings-for-bspwm-----------#
+
+#Kitty UWU
+ctrl + alt + t
+	kitty 
+
+#Floating Kitty
+ctrl + shift + t
+	bspc rule -a kitty -o state=floating follow=on center=true rectangle=900x900+0+0 && kitty
+
+#Program Launcher
+super + r
+	rofi
+
+#Firefox
+super + f
+	firefox
+
+#LockScreen
+ctrl + alt + l
+	betterlockscreen -l
+
+# make sxhkd reload its configuration files:
+super + o
+	pkill -USR1 -x sxhkd
+
+############################################
+#----------bspwm-specific-hotkeys----------#
+############################################
+
+#Quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+########################
+
+#Close and kill
+super + {_,shift + }w
+	bspc node -{c,k}
+
+#Alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+#Alternate between tiled and floating
+super + space
+	bspc node -t "~"{floating,tiled}
+
+#Alternate between pseudo tiled and tiled 
+super + shift + space
+	bspc node -t "~"{pseudo_tiled,tiled}
+
+#Set the Node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#Send window to another place in the screen
+super {_,shift +}{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+#Change focus to next window
+alt + {_,shift +}Tab
+	bspc node -f {next.local,prev.local}
+
+#Change to another desktop
+ctrl + alt + {Left,Right}
+	bspc desktop -f {prev.local,next.local}
+
+#Send window to another desktop
+super + {_,shift +}{1-5}
+	bspc {desktop -f, node -d} '^{1-5}
+
+
+#
+# move/resize
+#
+
+# Expand window 
+super + ctrl + {Left,Right,Up,Down}
+	bspc node -z {left -20 0,right 20 0,top 0 -20,bottom 0 20}
+
+# Shrinking windows
+super + alt + {Right,Left,Down,Up}
+	bspc node -z {left 20 0,right -20 0,top 0 20,bottom 0 -20
+
+# move a floating window
+alt + shift + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
